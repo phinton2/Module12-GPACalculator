@@ -1,6 +1,7 @@
 // PART A
 import java.util.Scanner;
 import java.util.*;
+import java.util.InputMismatchException;
 
 public class GPACalculator {
 
@@ -15,8 +16,9 @@ public class GPACalculator {
         int qualityPoints = 0;
         int totalCreditHrs = 0;
 
-        // PART B
         
+        // PART B
+        /*
         while (quitCmd != 'q') {
 
             // Get user data
@@ -31,7 +33,8 @@ public class GPACalculator {
                 // Error checking negative credit hours
                 if (creditHours < 0) { // if invalid credit hours
                     System.out.println("Invalid number of credit hours. Try again!");
-                } else {
+                }
+                 else if (creditHours >= 0) {
                     totalCreditHrs += creditHours;
                 }
                 qualityPoints += getLetterGradeValue(letterGrade) * creditHours;
@@ -40,10 +43,10 @@ public class GPACalculator {
                 scnr.nextLine();
             }
         }
-        
+        */
 
-        // PART C
-        while (quitCmd != 'q') {
+        // PART C - CREDIT HOUR
+        do {
             try {
                 // Get user data
                 System.out.print("Enter letter grade: ");
@@ -58,8 +61,8 @@ public class GPACalculator {
                 if (creditHours < 0) {
                     throw new Exception("Invalid number of credit hours. Try again!");
                 }
-                totalCreditHrs += creditHours;
 
+                totalCreditHrs += creditHours;
                 qualityPoints += getLetterGradeValue(letterGrade) * creditHours;
             } 
             // PART D
@@ -68,17 +71,17 @@ public class GPACalculator {
                 scnr.nextLine(); // consume the new line from the last nextInt call
                 System.out.println("Invalid type entered. Please try again!");
             }
-            catch (Exception e) {
+            catch (Exception excpt) {
                 // Prints the error message passing throw statment
-                System.out.println(e.getMessage());
+                System.out.println(excpt.getMessage());
                 System.out.println("Cannot compute GPA");
             } 
             System.out.print("\nEnter any key to continue entering grade or 'q' to quit: ");
             quitCmd = scnr.next().charAt(0);
             scnr.nextLine();
-        }
+        } while (quitCmd != 'q');
 
-        // PART E
+        // PART E - GPA
         do {
             // calculate GPA - Divide the total quality points by the total credit hours
             try {
